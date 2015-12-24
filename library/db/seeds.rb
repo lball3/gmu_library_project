@@ -5,3 +5,15 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+# 4.times do
+
+
+Book.create([
+  { title: 'The Hobbit', author:'Tolkien', pages:384, price:22.68 },
+  { title: 'Atlas Shrugged', author:'Ayn Rand', pages:1200, price: 18.81 },
+  { title: "Ender's Game", author:'Orson Scott Card', pages:352, price:4.83 },
+  { title: 'Hamlet', author:'Shakespeare', pages:342, price:5.34 }
+    ])
+
+# end
+
