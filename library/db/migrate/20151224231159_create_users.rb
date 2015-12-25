@@ -1,6 +1,6 @@
 class CreateUsers < ActiveRecord::Migration
   def change
-    create_table :users, :primary_key do |t|
+    create_table :users do |t|
       t.string :name
       t.string :user_id
       t.string :password_digest

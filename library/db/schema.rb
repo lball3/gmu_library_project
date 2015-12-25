@@ -57,5 +57,14 @@ ActiveRecord::Schema.define(version: 20151224231159) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
+  
+  create_table "users", force: true do |t|
+    t.integer   "id"
+    t.string    "name"
+    t.date      "dob"
+    t.string    "nationality"
+    t.string    "biography",      null: false
+    t.string    "image_url",      null: false
+  end
 
 end
