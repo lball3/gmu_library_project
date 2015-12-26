@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+
+row {
+	margin-bottom: 5px;
+}
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+.buttonnav .button_to .btn{ float:left ; margin-right:10px; margin-bottom: 10px; }
+.bookimage {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	height: 175px;
+	width: 100px;
+}
+h4.clear {
+	clear:both;
+	color: blue;
+}
+header {
+	color: blue;
+}
+.title {
+	font-size: 1.4em;
+}
