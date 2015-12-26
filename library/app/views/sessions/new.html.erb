@@ -1,9 +1,20 @@
-<h1>Login</h1>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3 well">
+    <h1>Sign In:</h1>
+		<%= form_for(:session, url: sessions_path) do |f| %>
 
-<%= form_tag '/login' do %>
+<p>
+			<%= f.label :user_id, class: "col-xs-3"%>
+			<%= f.text_field :user_id %>
+		</p>
 
-  Email: <%= text_field_tag :email %>
-  Password: <%= password_field_tag :password %>
-  <%= submit_tag "Submit" %>
+            <p>
+			<%= f.label :password, class: "col-xs-3"%>
+			<%= f.password_field :password %>
+		    </p>
 
-<% end %>
+			<%= f.submit "Sign In", class: "btn btn-large btn-primary" %>
+
+		<% end %>
+	</div>
+</div>

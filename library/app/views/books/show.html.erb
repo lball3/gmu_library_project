@@ -1,16 +1,44 @@
-<% content_for :title, @book.title %>
+<<p id="notice"><%= notice %></p>
 <article class="book">
   <header>
     <h2><%= @book.title %></h2>
   </header>
-  <p><label>Author:</label> <%= @book.author %></p>
-  <p><label>Pages:</label> <%= number_with_delimiter(@book.pages) %></p>
-  <p><label>Price:</label> <%= number_to_currency(@book.price) %></p>
+
+
+  <%= image_tag @book.image_cover_url, class: "bookimage" %>
+
+  <p>
+  <%= @book.abstract %>
+  <p>
+
+  <h4 class="clear">Details</h3>
+  <p><label>ISBN:</label> <%= @book.isbn %></p>
+  <p><label>Author:</label> <%= link_to(@book.author, author_path(:id => @book.author_id)) %></p>
+  <p><label>Genre:</label> <%= @book.genre %></p>
+  <p><label>Pages:</label> <%= @book.pages %></p>
+  <p><label>Published On:</label> <%= @book.published_on %></p>
+  <p><label>Available to Reserve:</label> <%= @available_to_reserve %></p>
 </article>
 
-<%= link_to 'All Books', books_path %>
-| <%= link_to 'Edit', edit_book_path(@book) %>
-
+<div class="buttonnav">
+  <% if show_details == true %>
+<%= button_to 'Edit', edit_book_path(@book), class: "btn btn-large",
+    method: :get%>
 <%= button_to 'Delete', @book,
-               method: :delete,
-               data: { confirm: 'Are you sure?' } %>
+  method: :delete,
+  data: {confirm: 'Are you sure?'},
+  class: "btn btn-primary" %>
+  <% end %>
+<%# button_to 'Reserve', edit_book_path(@book), class: "btn btn-large"%>
+
+<%= form_for [@book, @book.reservations.build] do |f| %>
+  <% if @reserved_by_user %>
+    <div class="btn btn-primary disabled">You already have this book reserved</div>
+  <% elsif @available_to_reserve <= 0 %>
+    <div class="btn btn-primary disabled">None available to reserve</div>
+  <% else %>
+    <%= f.submit "Reserve", class: "btn btn-primary" %>
+  <% end %>
+<% end %>
+
+</div>

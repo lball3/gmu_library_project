@@ -1,0 +1,29 @@
+<h1>Overdue Books</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <% if reservation.overdue? %>
+        <tr>
+          <td>
+            <%= image_tag reservation.book.image_cover_url, class: "bookimage" %>
+            <span class="title"><%= link_to(reservation.book.title, reservation.book) %></span>
+            by <%= reservation.book.author %>
+            <br>
+            Due: <%= reservation.due_on.strftime("%m/%d/%Y") %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
