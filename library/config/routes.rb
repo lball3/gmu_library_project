@@ -1,16 +1,18 @@
-Rails.application.routes.draw do
-#get "/books" => "books#index", as: 'books'
-#get "/books/new" => "books#new", as: 'new_book'
-#et "/books/:id" => "books#show", as: 'book'
-#post "/books" => "books#create"
-#get "/books/:id/edit" => "books#edit", as: 'edit_book'
-#patch "/books/:id" => "books#update"
-#delete "/books/:id" => "books#destroy"
+Library::Application.routes.draw do
 
   resources :books do
     get 'page/:page', :action => :index, :on => :collection
+    resources :reservations, only: [:create]
   end
-  root 'books#index'
+
+  resources :reservations, only: [:index, :destroy]
+  resources :authors, only: [:index, :show]
+  get '/overdue', to: 'reservations#overdue', as: 'overdue_books'
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+  root 'sessions#new'
+  
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
