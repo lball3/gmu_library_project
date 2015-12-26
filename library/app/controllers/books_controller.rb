@@ -5,16 +5,17 @@ class BooksController < ApplicationController
 # ...
 
   def index
-    @available_at = Time.now
-    @books = Book.all
+    unless params[:search].blank?
+      @books = Book.search(params[:search]).order(:title).page(params[:page])
+    else
+      @books = Book.all.order(:title).page(params[:page])
+    end
   end
+
 
   def show
-  end
-
-  def index
-    @available_at = Time.now
-    @books = Book.order(:title).page(params[:page])
+    @available_to_reserve = @book.total_in_library - @book.reservations.count
+    @reserved_by_user = current_user.reservations.where(book: @book).exists?
   end
   
   def new
@@ -49,8 +50,8 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :author, :pages, :price)
-  end
+      params.require(:book).permit(:title, :author, :author_id, :pages, :abstract, :isbn, :genre, :published_on, :total_in_library, :image_cover_url)
+    end
 
   def set_book
     @book = Book.find(params[:id])

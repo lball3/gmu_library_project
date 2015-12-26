@@ -2,16 +2,24 @@ Rails.application.routes.draw do
 
    resources :books do
     get 'page/:page', :action => :index, :on => :collection
-   end
+   resources :reservations, only: [:create]
+  end
+
+  resources :reservations, only: [:index, :destroy]
+  resources :authors, only: [:index, :show]
+  get '/overdue', to: 'reservations#overdue', as: 'overdue_books'
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+
    
-   get '/login' => 'sessions#new'
-   post '/login' => 'sessions#create'
-   get '/logout' => 'sessions#destroy'
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
     
-   get '/signup' => 'users#new'
-   post '/users' => 'users#create'
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
   
-   root 'books#index'
+  root 'books#index'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
