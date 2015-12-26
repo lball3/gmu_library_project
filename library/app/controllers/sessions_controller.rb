@@ -5,7 +5,7 @@
 
   def create
   	user = User.find_by(user_id: params[:session][:user_id])
-  	if user and user.authenticate(params[:session][:password])
+  	if user.password == params[:session][:password]
   		session[:user_id] = user.id
   		flash[:success] = "You have successfully logged in."
   		redirect_to books_url
@@ -22,3 +22,9 @@
   end
 
 end
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 <div id="sidebar">
-  <!-- if user_is_logged_in? -->
+  <%if user_is_logged_in? %>
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">Things to do..</h3>
@@ -14,19 +14,19 @@
     <p><span class="glyphicon glyphicon-calendar"></span>
       <%= link_to 'My Reservations', books_path%>
       </p>
-    <!-- if show_details == true -->
+    <% if show_details == true %>
       <p><span class="glyphicon glyphicon-download-alt"></span>
         <%= link_to 'New Book', new_book_path %>
       </p>
       <p><span class="glyphicon glyphicon-download-alt"></span>
         <%= link_to 'Overdue Books', books_path %> 
       </p>
-    <!-- end -->
+    <% end %>
     
     <p><span class="glyphicon glyphicon-off"></span>
       <%= link_to 'Log out', session_path(:user_id), method: :delete%>
     </p>
   </div>
 </div>
-<!-- end -->
+<% end %>
 </div> 
